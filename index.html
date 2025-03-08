@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch ⏱️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+    
+        #Container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    
+        #startbtn {
+            background-color: #28a745;
+            color: white;
+        }
+    
+        #startbtn:hover {
+            background-color: #218838;
+        }
+    
+        #stopbtn {
+            background-color: #dc3545;
+            color: white;
+        }
+    
+        #stopbtn:hover {
+            background-color: #c82333;
+        }
+    
+        #resetbtn {
+            background-color: #007bff;
+            color: white;
+        }
+    
+        #resetbtn:hover {
+            background-color: #0056b3;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="Container">
+        <h1>
+            <span id="Timer">00:00:00:00</span>
+        </h1>
+
+        <button id="stopbtn" onclick="stopbtn()">Stop</button>
+        <button id="startbtn" onclick="startbtn()">Start</button>
+        <button id="resetbtn" onclick="resetbtn()">Reset</button>
+    </div>
+</body>
+<script>
+        let Timer = document.getElementById("Timer");
+        let timer;
+        let running = false;
+        let ms = 0;
+        let seconds = 0;
+        let minutes = 0;
+        let hours   = 0;
+
+        
+        function update() {
+            document.querySelector("#Timer").innerText =
+                (hours < 10 ? "0" : "") + hours + ":" +
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds+":"+
+                (ms<10 ? "0" : "")+ms;
+        }
+
+        function startbtn() {
+            if (!running) {
+                running = true;
+                timer = setInterval(() => {
+                    ms++;
+
+                    if(ms==100){
+                        ms = 0;
+                        seconds++;
+                    }
+
+                    if (seconds === 60) {
+                        seconds = 0;
+                        minutes++;
+                    }
+                    if (minutes === 60) {
+                        minutes = 0;
+                        hours++;
+                    }
+                    update();
+                }, 10);
+            }
+        }
+
+        function stopbtn() {
+            clearInterval(timer);
+            running = false;
+        }
+
+        function resetbtn() {
+            stopbtn();
+            ms = 0;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            update();
+        }
+</script>
+</html>
