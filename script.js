@@ -52,6 +52,9 @@ function resetbtn() {
     minutes = 0;
     hours = 0;
     update();
+    let pinList = document.getElementById("pinTimerContainer");
+    pinList.innerHTML = "";
+  
 }
 
 
@@ -72,3 +75,4 @@ function pinbtn() {
         pinList.scrollTo({ top: pinList.scrollHeight, behavior: 'smooth' });
     }, 10);
 }
+
