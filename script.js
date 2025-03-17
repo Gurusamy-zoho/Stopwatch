@@ -67,7 +67,7 @@ function pinbtn() {
     
     pinList.appendChild(listItem);
 
-    if (pinList.children.length > 5) {
+    if (pinList.children.length > 10000) {
         pinList.removeChild(pinList.firstElementChild);
     }
 
